@@ -70,3 +70,19 @@
 - 댓글 작성, 수정 시 내용은 공백 혹은 빈칸으로 작성하지 않기
 - 댓글 수정, 삭제는 댓글 작성자만 가능하게 하기
 - 게시글 삭제 시 해당 댓글 데이터도 같이 삭제되게 하기
+
+## 👉 API명세서
+
+### API 설계
+
+⚪️ **MEMBER API**
+
+[제목 없음](https://www.notion.so/bd4064092e474561b6d9b51d260fdbfc)
+
+⚪️ **BOARD API**
+
+[제목 없음](https://www.notion.so/d84af291d2c14b35bbfa741eb10ed006)
+
+⚪️ **COMMENT API**
+
+[제목 없음](https://www.notion.so/2f5dbba65acf44e99e666303d00ce664)
