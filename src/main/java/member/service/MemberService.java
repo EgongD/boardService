@@ -1,4 +1,4 @@
-package member;
+package member.service;
 
 public class MemberService {
 }
