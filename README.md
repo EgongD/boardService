@@ -77,12 +77,12 @@
 
 ⚪️ **MEMBER API**
 
-[제목 없음](https://www.notion.so/bd4064092e474561b6d9b51d260fdbfc)
+[Member API](https://www.notion.so/bd4064092e474561b6d9b51d260fdbfc)
 
 ⚪️ **BOARD API**
 
-[제목 없음](https://www.notion.so/d84af291d2c14b35bbfa741eb10ed006)
+[Board API](https://www.notion.so/d84af291d2c14b35bbfa741eb10ed006)
 
 ⚪️ **COMMENT API**
 
-[제목 없음](https://www.notion.so/2f5dbba65acf44e99e666303d00ce664)
+[Comment API](https://www.notion.so/2f5dbba65acf44e99e666303d00ce664)
