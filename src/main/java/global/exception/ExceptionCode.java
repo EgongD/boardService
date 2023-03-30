@@ -8,7 +8,13 @@ public enum ExceptionCode {
 
     MEMBER_NOT_FOUND(404, "사용자가 없습니다."),
 
-    NICKNAME_EXIST(409, "사용중인 닉네임 입니다.");
+    NICKNAME_EXIST(409, "사용중인 닉네임 입니다."),
+
+    ACCESS_TOKEN_NOT_FOUND(404, "AccessToken not found"),
+
+    REFRESH_TOKEN_NOT_FOUND(404, "RefreshToken이 없습니다."),
+
+    DIFFERENT_REFRESHTOKEN(409, "RefreshTokens are different");
 
     @Getter
     private int status;

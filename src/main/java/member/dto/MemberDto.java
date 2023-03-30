@@ -1,7 +1,6 @@
 package member.dto;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -29,6 +28,7 @@ public class MemberDto {
     }
 
     @Getter
+    @Data
     @NoArgsConstructor
     public static class Patch{
 
@@ -44,7 +44,9 @@ public class MemberDto {
     }
 
     @Getter
+    @Builder
     @NoArgsConstructor
+    @AllArgsConstructor
     public static class Response{
 
         private Long memberId;

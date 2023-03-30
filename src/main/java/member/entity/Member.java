@@ -32,6 +32,9 @@ public class Member extends Auditable {
     @Column(nullable = false)
     private String nickname;
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles = new ArrayList<>();
+
     @JsonIgnore
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Board> boardList = new ArrayList<>();

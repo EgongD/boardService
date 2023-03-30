@@ -1,5 +1,6 @@
 package member.controller;
 
+import global.security.JwtProvider;
 import member.dto.MemberDto;
 import member.entity.Member;
 import member.mapper.MemberMapper;
@@ -16,10 +17,15 @@ public class MemberController {
 
     private final MemberMapper memberMapper;
 
+    private final JwtProvider jwtProvider;
+
     public MemberController(MemberService memberService,
-                            MemberMapper memberMapper){
+                            MemberMapper memberMapper,
+                            JwtProvider jwtProvider){
+
         this.memberService = memberService;
         this.memberMapper = memberMapper;
+        this.jwtProvider = jwtProvider;
     }
 
     @PostMapping("/auth")
@@ -36,7 +42,7 @@ public class MemberController {
     public ResponseEntity<?> patchMember(@RequestBody MemberDto.Patch patch,
                                          @RequestHeader("Authorization") String accessToken){
 
-        Long.memberId = jwtProvider.extractMemberId(accessToken);
+        Long memberId = jwtProvider.extractMemberId(accessToken);
         patch.setMemberId(memberId);
         Member member = memberService.updateMember(memberMapper.memberPatchToMember(patch));
 
