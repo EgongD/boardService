@@ -31,7 +31,7 @@ public class BoardController {
     }
 
     @PostMapping
-    public ResponseEntity postBoard(@RequestBody BoardDto.Post post){
+    public ResponseEntity<?> postBoard(@RequestBody BoardDto.Post post){
 
         Board board = boardService.createBoard(boardMapper.boardPostToBoard(post), post.getMemberId());
 
@@ -50,7 +50,7 @@ public class BoardController {
 
 
     @GetMapping("/{board-id}")
-    public ResponseEntity getBoard(@PathVariable("board-id") @Positive Long boardId) {
+    public ResponseEntity<?> getBoard(@PathVariable("board-id") @Positive Long boardId) {
 
         Board board = boardService.findBoard(boardId);
 
@@ -60,7 +60,7 @@ public class BoardController {
     }
 
     @DeleteMapping("/{board-id}")
-    public ResponseEntity deleteBoard(@PathVariable("board-id") @Positive Long boardId){
+    public ResponseEntity<?> deleteBoard(@PathVariable("board-id") @Positive Long boardId){
 
         boardService.deleteBoard(boardId);
 

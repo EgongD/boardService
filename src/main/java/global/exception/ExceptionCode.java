@@ -14,6 +14,8 @@ public enum ExceptionCode {
 
     REFRESH_TOKEN_NOT_FOUND(404, "RefreshToken이 없습니다."),
 
+    BOARD_NOT_FOUND(404, "글이 없습니다."),
+
     DIFFERENT_REFRESHTOKEN(409, "RefreshTokens are different");
 
     @Getter
