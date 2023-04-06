@@ -54,11 +54,17 @@ public class BoardService {
         return board;
     }
 
-    public Board updateBoard(Board board){
+    public Board updateBoard(Board board, Long boardId){
 
         Board findBoard = findExistedBoard(board.getBoardId());
 
         return findBoard;
+    }
+
+    public void deleteBoard(Long boardId){
+
+        Board findBoard = findExistedBoard(boardId);
+        boardRepository.delete(findBoard);
     }
 
 

@@ -10,6 +10,8 @@ public class BoardDto {
     @NoArgsConstructor
     public static class Post {
 
+        private Long memberId;
+
         @NotBlank(message = "글의 제목을 적어주세요.")
         private String title;
 
@@ -24,6 +26,8 @@ public class BoardDto {
     @Data
     @NoArgsConstructor
     public static class Patch {
+
+        private Long boardId;
 
         @NotBlank(message = "제목은 공백이 아니어야 합니다.")
         private String title;
@@ -45,6 +49,6 @@ public class BoardDto {
 
         private String content;
 
-        private String hasgTag;
+        private String hashTag;
     }
 }
