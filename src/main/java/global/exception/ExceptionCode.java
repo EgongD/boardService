@@ -16,6 +16,10 @@ public enum ExceptionCode {
 
     BOARD_NOT_FOUND(404, "글이 없습니다."),
 
+    COMMENT_NOT_FOUND(404, "댓글이 없습니다."),
+
+    UNAUTHORIZED(409, "직성자가 동일하지 않습니다."),
+
     DIFFERENT_REFRESHTOKEN(409, "RefreshTokens are different");
 
     @Getter

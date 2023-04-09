@@ -32,12 +32,10 @@ public class Board extends Auditable {
     @Column
     private String hashtag;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "MEMBER_ID")
     private Member member;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
     private List<Comment> commentList = new ArrayList<>();
 }

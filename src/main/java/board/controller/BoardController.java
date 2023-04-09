@@ -40,9 +40,9 @@ public class BoardController {
     }
 
     @PatchMapping("/{board-id}")
-    public ResponseEntity<?> patchBoard(@RequestBody BoardDto.Patch patch, @PathVariable("board-id") Long boardId) {
+    public ResponseEntity<?> patchBoard(@RequestBody BoardDto.Patch patch, @PathVariable("board-id") Long boardId, Long memberId) {
 
-        Board board = boardService.updateBoard(boardMapper.boardPatchToBoard(patch), boardId);
+        Board board = boardService.updateBoard(boardMapper.boardPatchToBoard(patch), boardId, memberId);
         BoardDto.Response boardResponse = boardMapper.boardToBoardResponseDto(board);
 
         return ResponseEntity.ok(boardResponse);
