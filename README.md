@@ -12,7 +12,7 @@
     - 사용자 - 회원가입 및 로그인, OAuth2 카카오 로그인, 회원 정보 수정, 중복검사, 비밀번호에 특수문자 포함
     - 댓글 - CRUD 기능
 - 개발 언어 및 프로그램 : Java 11, IntelliJ
-- 개발 환경 : SpringBoot 3.0.5, gradle - Groovy, Spring JPA, OAuth2, Spring Security
+- 개발 환경 : SpringBoot 2.7.5, gradle, Spring JPA, OAuth2, Spring Security
 - 데이터베이스 : MySQL
 - 관리 툴 : Github
 - 간단한 소개 : 기본적인 웹 게시판
