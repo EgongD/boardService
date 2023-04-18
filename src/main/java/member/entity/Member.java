@@ -4,7 +4,6 @@ import board.entity.Board;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import comment.entity.Comment;
 import global.audit.Auditable;
-import global.auth.Authority;
 import lombok.*;
 
 import javax.persistence.*;
@@ -48,24 +47,4 @@ public class Member extends Auditable {
     @JsonIgnore
     @OneToMany(mappedBy = "member", cascade = CascadeType.REMOVE)
     private List<Comment> commentList = new ArrayList<>();
-
-    @ManyToMany
-    @JoinTable(name = "member_authority", joinColumns = {@JoinColumn(name = "member_id",
-    referencedColumnName = "member")}, inverseJoinColumns = {@JoinColumn(name = "authority_name",
-    referencedColumnName = "authority_name")})
-    private Set<Authority> authorities;
-
-    private Long tokenWeight;
-
-    @Builder
-    public Member(String email, String password, String nickname,
-                  Set<Authority> authorities, boolean activated){
-
-        this.email = email;
-        this.password = password;
-        this.nickname = nickname;
-        this.authorities = authorities;
-        this.activated = activated;
-        this.tokenWeight = 1L;
-    }
 }
