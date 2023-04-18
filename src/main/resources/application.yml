@@ -18,6 +18,7 @@ spring:
         show_sql: true
     defer-datasource-initialization: true
 
-logging:
-  level:
-    me.silvernine: DEBUG
+jwt:
+  key: ${JWT_SECRET_KEY}
+  access-token-expiration-minutes: 30
+  refresh-token-expiration-minutes: 420
