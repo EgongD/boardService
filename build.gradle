@@ -26,6 +26,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-mail'
 	implementation 'com.google.code.gson:gson'
+	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+
 	implementation 'org.springframework:spring-context:5.3.9'
 	implementation 'org.mapstruct:mapstruct:1.5.2.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.2.Final'
@@ -45,7 +47,7 @@ dependencies {
 
 	implementation 'javax.servlet:javax.servlet-api:4.0.1'
 
-
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 }
 
 tasks.named('test') {
