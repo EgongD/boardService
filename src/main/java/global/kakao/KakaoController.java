@@ -2,38 +2,40 @@ package global.kakao;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.Map;
+import java.util.HashMap;
+
 
 @Controller
-@RequestMapping("/member")
 public class KakaoController {
 
     @Autowired
-    KakaoService kakaoService;
+    private KakaoService kakaoService;
 
-    @GetMapping("/do")
-    public String loginPage(){
+    @RequestMapping(value = "/")
+    public String index(){
 
-        return "kakaoCI/login";
+        return "index";
     }
 
-    @GetMapping("/kakao")
-    public String getCI(@RequestParam String code, Model model) throws IOException{
+    @RequestMapping(value = "/login")
+    public String login(@RequestParam("code") String code, HttpSession session) {
 
-        System.out.println("code = " + code);
+        String access_token = kakaoService.getAccessToken(code);
 
-        String access_token = kakaoService.getToken(code);
-        Map<String, Object> userInfo = kakaoService.getUserInfo(access_token);
-        model.addAttribute("code", code);
-        model.addAttribute("access_token", access_token);
-        model.addAttribute("userInfo", userInfo);
+        HashMap<String, Object> userInfo = kakaoService.getUserInfo(access_token);
 
+        if (userInfo.get("email") != null){
+
+            session.setAttribute("userId", userInfo.get("email"));
+            session.setAttribute("access_token", access_token);
+        }
+
+        System.out.println("controller access_token : " + access_token);
         return "index";
     }
 }

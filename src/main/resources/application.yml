@@ -5,38 +5,48 @@ spring:
       path: /h2-console
   datasource:
     url: jdbc:h2:mem:testdb
-    driver-class-name: org.h2.Driver
-    username: sa
-    password:
   jpa:
-    database-platform: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
+    show-sql: true
     properties:
       hibernate:
         format_sql: true
-        show_sql: true
-    defer-datasource-initialization: true
-
-jwt:
-  key: ${JWT_SECRET_KEY}
-  access-token-expiration-minutes: 30
-  refresh-token-expiration-minutes: 420
-
-security:
-  oauth2:
-    client:
-      registration:
-        kakao:
-          client-id: be898f7a7177c25770b5213027ca4088
-          redirect-uri: "http://localhost:8080/login/oauth2/kakao/{registrationId}"
-          client-authentication-method: POST
-          authorization-grant-type: authorization_code
-          scope: profile_nickname, profile_picture #동의항목
-          client-name: kakao
-      provider:
-        kakao:
-          authorization-uri: http://kauth.kakao.com/oauth/authorize
-          token-uri: http://kauth.kakao.com/oauth/token
-          user-info-uri: http://kauth.kakao.com/v2/user/me
-          user-name-attribute: id
+  sql:
+    init:
+      data-locations: classpath*db/h2/date.sql
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            client-id: be898f7a7177c25770b5213027ca4088
+            redirect-uri: "http://localhost:8080/login/oauth2/kakao/{registrationId}"
+            client-authentication-method: POST
+            authorization-grant-type: authorization_code
+            scope: profile_nickname, profile_picture #동의항목
+            client-name: kakao
+        provider:
+          kakao:
+           authorization-uri: http://kauth.kakao.com/oauth/authorize
+           token-uri: http://kauth.kakao.com/oauth/token
+           user-info-uri: http://kauth.kakao.com/v2/user/me
+           user-name-attribute: id
+  logging:
+    level:
+      org:
+        springframework:
+          orm:
+            jpa: DEBUG
+  server:
+    servlet:
+      encoding:
+        force-response: true
+  mail:
+    address:
+      admin: admin@gmail.com
+  jwt:
+    key:
+      secret: ${JWT_SECRET_KEY}
+    access-token-expiration-minutes: 30
+    refresh-token-expiration-minutes: 420
