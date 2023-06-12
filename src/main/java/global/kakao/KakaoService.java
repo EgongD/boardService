@@ -133,42 +133,5 @@ public class KakaoService {
         return result;
     }
 
-    public String getAgreementInfo(String access_token){
-
-        String result = "";
-        String host = "https://kapi.kakao.com/v2/user/scopes";
-
-        try {
-
-            URL url = new URL(host);
-
-            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setRequestMethod("GET");
-            urlConnection.setRequestProperty("Authorization", "Barer " + access_token);
-
-            BufferedReader br = new BufferedReader(new InputStreamReader(urlConnection.getInputStream()));
-            String line = "";
-
-            while ((line = br.readLine()) != null){
-
-                result += line;
-            }
-
-            int responseCode = urlConnection.getResponseCode();
-            System.out.println("responseCode = " + responseCode);
-
-            br.close();
-        } catch (MalformedURLException e){
-
-            e.printStackTrace();
-        } catch (ProtocolException e){
-
-            e.printStackTrace();
-        } catch (IOException e){
-
-            e.printStackTrace();
-        }
-
-        return result;
-    }
+ㅌ
 }
