@@ -1,4 +1,12 @@
 spring:
+
+  datasource:
+    url: jdbc:h2:~/test
+    driverClassName: org.h2.Driver
+    username: sa
+    password: 1111
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
   h2:
     console:
       enabled: true
@@ -50,3 +58,4 @@ spring:
       secret: ${JWT_SECRET_KEY}
     access-token-expiration-minutes: 30
     refresh-token-expiration-minutes: 420
+

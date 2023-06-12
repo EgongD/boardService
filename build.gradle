@@ -31,6 +31,7 @@ dependencies {
 	implementation 'org.springframework:spring-context:5.3.9'
 	implementation 'org.mapstruct:mapstruct:1.5.2.Final'
 	annotationProcessor 'org.mapstruct:mapstruct-processor:1.5.2.Final'
+
 	runtimeOnly 'com.h2database:h2'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
@@ -48,6 +49,7 @@ dependencies {
 	implementation 'javax.servlet:javax.servlet-api:4.0.1'
 
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+
 }
 
 tasks.named('test') {

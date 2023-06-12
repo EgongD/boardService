@@ -11,6 +11,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+
 import java.util.List;
 import java.util.Optional;
 
@@ -36,6 +37,7 @@ public class MemberService {
         this.passwordEncoder = passwordEncoder;
         this.authorityUtils = authorityUtils;
         this.publisher = publisher;
+
     }
 
     public Member createMember(Member member){
@@ -53,6 +55,7 @@ public class MemberService {
         publisher.publishEvent(new MemberRegistrationApplicationEvent(this, savedMember));
 
         return savedMember;
+
     }
 
     public Member updateMember(Member member) {
