@@ -20,6 +20,7 @@ import java.util.List;
 public class Member extends Auditable {
 
     @Id
+    @Column(name = "member_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long memberId;
 
@@ -31,6 +32,9 @@ public class Member extends Auditable {
 
     @Column(nullable = false)
     private String nickname;
+
+    @Column(name = "activated")
+    private boolean activated;
 
     @ElementCollection(fetch = FetchType.EAGER)
     private List<String> roles = new ArrayList<>();
