@@ -28,8 +28,8 @@ spring:
       client:
         registration:
           kakao:
-            client-id: be898f7a7177c25770b5213027ca4088
-            redirect-uri: "http://localhost:8080/login/oauth2/kakao/{registrationId}"
+            client-id: 
+            redirect-uri: 
             client-authentication-method: POST
             authorization-grant-type: authorization_code
             scope: profile_nickname, profile_picture #동의항목
