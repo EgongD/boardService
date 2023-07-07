@@ -3,7 +3,7 @@ package comment.entity;
 import board.entity.Board;
 import global.audit.Auditable;
 import lombok.*;
-import member.entity.Member;
+import user.entity.User;
 
 import javax.persistence.*;
 
@@ -24,10 +24,10 @@ public class Comment extends Auditable {
     private String content;
 
     @ManyToOne
-    @JoinColumn(name = "MEMBER_ID")
-    private Member member;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToOne
-    @JoinColumn(name = "BOARD_ID")
+    @JoinColumn(name = "board_id")
     private Board board;
 }
