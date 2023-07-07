@@ -1,10 +1,9 @@
 package board.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import comment.entity.Comment;
 import global.audit.Auditable;
 import lombok.*;
-import member.entity.Member;
+import user.entity.User;
 
 import javax.persistence.*;
 import java.util.ArrayList;
@@ -33,8 +32,8 @@ public class Board extends Auditable {
     private String hashtag;
 
     @ManyToOne
-    @JoinColumn(name = "MEMBER_ID")
-    private Member member;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @OneToMany(mappedBy = "board", cascade = CascadeType.REMOVE)
     private List<Comment> commentList = new ArrayList<>();

@@ -5,9 +5,9 @@ import board.repository.BoardRepository;
 import comment.service.CommentService;
 import global.exception.BusinessLogicException;
 import global.exception.ExceptionCode;
-import member.entity.Member;
-import member.repositoory.MemberRepository;
-import member.service.MemberService;
+import user.entity.User;
+import user.repositoory.UserRepository;
+import user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,31 +20,31 @@ public class BoardService {
     private final BoardRepository boardRepository;
 
     @Autowired
-    private final MemberService memberService;
+    private final UserService userService;
 
     @Autowired
     private final CommentService commentService;
 
     @Autowired
-    private final MemberRepository memberRepository;
+    private final UserRepository userRepository;
 
     public BoardService(BoardRepository boardRepository,
-                        MemberService memberService,
+                        UserService userService,
                         CommentService commentService,
-                        MemberRepository memberRepository){
+                        UserRepository userRepository){
 
         this.boardRepository = boardRepository;
-        this.memberService = memberService;
+        this.userService = userService;
         this.commentService = commentService;
-        this.memberRepository = memberRepository;
+        this.userRepository = userRepository;
     }
 
-    public Board createBoard(Board board, Long memberId){
+    public Board createBoard(Board board, Long userId){
 
         // 멤버아이디로 멤버 찾기
-        Member member = memberService.findMember(memberId);
+        User user = userService.findUser(userId);
         // 멤버 세팅하기
-        board.setMember(member);
+        board.setUser(user);
 
         // 게시글 저장 후 반환
         return boardRepository.save(board);
@@ -58,12 +58,12 @@ public class BoardService {
         return board;
     }
 
-    public Board updateBoard(Board board, Long boardId, Long memberId){
+    public Board updateBoard(Board board, Long boardId, Long userId){
 
         // 게시글 ID를 통해 게시글을 찾기
         Board findBoard = findExistedBoard(board.getBoardId());
 
-        if(findBoard.getMember().getMemberId() != memberId){
+        if(findBoard.getUser().getUserId() != userId){
             throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED);
         }
 

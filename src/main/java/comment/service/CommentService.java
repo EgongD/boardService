@@ -8,8 +8,8 @@ import comment.mapper.CommentMapper;
 import comment.repository.CommentRepository;
 import global.exception.BusinessLogicException;
 import global.exception.ExceptionCode;
-import member.entity.Member;
-import member.repositoory.MemberRepository;
+import user.entity.User;
+import user.repositoory.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +25,7 @@ public class CommentService {
     private final CommentMapper commentMapper;
 
     @Autowired
-    private final MemberRepository memberRepository;
+    private final UserRepository userRepository;
 
     @Autowired
     private final BoardRepository boardRepository;
@@ -35,13 +35,13 @@ public class CommentService {
 
     public CommentService(CommentRepository commentRepository,
                           CommentMapper commentMapper,
-                          MemberRepository memberRepository,
+                          UserRepository userRepository,
                           BoardRepository boardRepository,
                           BoardService boardService){
 
         this.commentRepository = commentRepository;
         this.commentMapper = commentMapper;
-        this.memberRepository = memberRepository;
+        this.userRepository = userRepository;
         this.boardRepository = boardRepository;
         this.boardService = boardService;
     }
@@ -51,10 +51,10 @@ public class CommentService {
         Board board = boardService.findBoard(boardId);
         comment.setBoard(board);
 
-        Member member= memberRepository.findById(comment.getMember().getMemberId()).orElseThrow(
-                () -> new BusinessLogicException(ExceptionCode.MEMBER_NOT_FOUND));
+        User user = userRepository.findById(comment.getUser().getUserId()).orElseThrow(
+                () -> new BusinessLogicException(ExceptionCode.USER_NOT_FOUND));
 
-        comment.setMember(member);
+        comment.setUser(user);
 
         return commentRepository.save(comment);
     }
@@ -64,8 +64,8 @@ public class CommentService {
         Comment findComment = findExistedComment(commentId);
         findComment.setContent(comment.getContent());
 
-        Member member = findComment.getMember();
-        if(!member.getMemberId().equals(member.getMemberId())){
+        User user = findComment.getUser();
+        if(!user.getUserId().equals(user.getUserId())){
             throw new BusinessLogicException(ExceptionCode.UNAUTHORIZED);
         }
 
