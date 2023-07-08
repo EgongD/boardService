@@ -65,6 +65,18 @@ spring:
             authorization-grant-type: authorization_code
             redirect-uri: http://localhost:8080/login/oauth2/code/naver
 
+            kakao:
+              client_id:
+              redirect_uri: http://localhost:8080/login/oauth2/code/kakao
+              client-authentication-method: POST
+              response_type: code
+              scope:
+                - profile_nickname
+                - account_email
+              client-name: Kakao
+              authorization-grant-type: authorization_code
+
+
         provider:
 
           naver:
@@ -78,23 +90,3 @@ spring:
            token-uri: http://kauth.kakao.com/oauth/token
            user-info-uri: http://kauth.kakao.com/v2/user/me
            user-name-attribute: id
-  logging:
-    level:
-      org:
-        springframework:
-          orm:
-            jpa: DEBUG
-  server:
-    servlet:
-      encoding:
-        force-response: true
-  mail:
-    address:
-      admin: admin@gmail.com
-  jwt:
-    key:
-      secret: ${JWT_SECRET_KEY}
-    access-token-expiration-minutes: 30
-    refresh-token-expiration-minutes: 420
-
-
