@@ -1,4 +1,4 @@
-package index.controller;
+package controller.index;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class IndexController {
     @GetMapping({"", "/"})
     public String index(){
 
-        return "index";
+        return "controller";
     }
 
     @GetMapping("/test/login")

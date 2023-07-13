@@ -1,5 +1,6 @@
 package security.auth;
 
+import lombok.Data;
 import user.entity.User;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Map;
 
+@Data
 public class PrincipalDetails implements UserDetails, OAuth2User {
 
     private User user;
