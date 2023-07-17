@@ -30,6 +30,8 @@ dependencies {
 	implementation 'com.google.code.gson:gson'
 	implementation 'com.googlecode.json-simple:json-simple:1.1.1'
 	implementation 'com.auth0:java-jwt:3.4.1'
+	implementation 'com.h2database:h2'
+	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.mysql:mysql-connector-j'

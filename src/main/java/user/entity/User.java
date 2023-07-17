@@ -16,6 +16,8 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@AllArgsConstructor
+@Builder
 @Table(name = "User")
 public class User extends Auditable {
 
@@ -33,8 +35,6 @@ public class User extends Auditable {
     @Column(nullable = false)
     private String username;
 
-    private String role;
-
     private String provider;
 
     private String providerId;
@@ -45,6 +45,9 @@ public class User extends Auditable {
     @CreationTimestamp
     private Timestamp createDate;
 
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> roles = new ArrayList<>();
+
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Board> boardList = new ArrayList<>();
@@ -53,19 +56,4 @@ public class User extends Auditable {
     @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE)
     private List<Comment> commentList = new ArrayList<>();
 
-    @Builder
-    public User(String email, String password, String username, String role,
-                String provider, String providerId, boolean activated, Timestamp createDate,
-                List<Board> boardList, List<Comment> commentList) {
-        this.email = email;
-        this.password = password;
-        this.username = username;
-        this.role = role;
-        this.provider = provider;
-        this.providerId = providerId;
-        this.activated = activated;
-        this.createDate = createDate;
-        this.boardList = boardList;
-        this.commentList = commentList;
-    }
 }

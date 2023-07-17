@@ -3,14 +3,13 @@ package security.jwt;
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import dto.LoginRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import security.auth.PrincipalDetails;
+import user.entity.User;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -23,6 +22,8 @@ import java.util.Date;
 public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     private final AuthenticationManager authenticationManager;
+
+    private final JwtProvider jwtProvider;
 
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
@@ -38,13 +39,9 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
             e.printStackTrace();
         }
 
-        System.out.println("JwtAuthenticationFilter : " + loginRequestDto);
-
         // 유저네임 패스워드 토큰 생성
         UsernamePasswordAuthenticationToken authenticationToken =
-                new UsernamePasswordAuthenticationToken(loginRequestDto.getUsername(), loginRequestDto.getPassword());
-
-        System.out.println("JwtAuthenticationFilter : 토큰 생성 완료");
+                new UsernamePasswordAuthenticationToken(loginRequestDto.getEmail(), loginRequestDto.getPassword());
 
         // authenticate() 함수가 호출 되면 인증 프로바이더가 유저 디테일 서비스의 loadUserByUsername(토큰의 첫번째 파라미터)을 호출하고,
         // UserDetails를 리턴받아서 토큰의 두번째 파라미터(credential)와 UserDetails(DB값)의 getPassword()함수로 비교해서 동일하면
@@ -55,9 +52,7 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
         // 인증 프로바이더의 알려줄 필요가 없다.
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
 
-        PrincipalDetails principalDetails = (PrincipalDetails) authentication.getPrincipal();
-        System.out.println("Authentication : " + principalDetails.getUser().getUsername());
-
+        System.out.println("====Authentication========" + authentication);
         return authentication;
     }
 
@@ -68,16 +63,17 @@ public class JwtAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                                             FilterChain filterChain, Authentication authResult)
         throws IOException, ServletException{
 
-        PrincipalDetails principalDetails = (PrincipalDetails) authResult.getPrincipal();
+        User user = (User) authResult.getPrincipal();
 
-        String jwtToken = JWT.create()
-                .withSubject(principalDetails.getUsername())
-                .withExpiresAt(new Date(System.currentTimeMillis() + JwtProperties.EXPIRATION_TIME))
-                .withClaim("id", principalDetails.getUser().getUserId())
-                .withClaim("username", principalDetails.getUser().getUsername())
-                .sign(Algorithm.HMAC512(JwtProperties.SECRET));
-        response.addHeader(JwtProperties.HEADER_STRING, JwtProperties.TOKEN_PREFIX + jwtToken);
-        System.out.println("인증완료");
-        super.successfulAuthentication(request, response, filterChain, authResult);
+        String accessToken = jwtProvider.createAccessToken(user);
+        String refreshToken = jwtProvider.createRefreshToken(user);
+
+        response.setHeader("Authorization", "Bearer " + accessToken);
+        response.setHeader("Refresh", refreshToken);
+        response.setHeader("Access-Expiration-Time", String.valueOf(jwtProvider.getAccessTokenExpirationMinutes()));
+        response.setHeader("User_Id", String.valueOf(user.getUserId()));
+        response.setHeader("Access-Control-Expose-Headers", "*");
+
+        this.getSuccessHandler().onAuthenticationSuccess(request, response, authResult);
     }
 }
