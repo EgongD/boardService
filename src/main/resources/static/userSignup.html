@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>회원가입 폼</title>
+</head>
+<body>
+<form th:action="@{/user/signuppro}" method="post">
+
+    <label for="userId">ID:</label>
+    <input type="text" id="userId" name="username" required><br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" required><br>
+
+    <label for="username">Username:</label>
+    <input type="text" id="username" name="username"><br>
+
+    <button type="submit">회원가입</button>
+</form>
+</body>
+</html>

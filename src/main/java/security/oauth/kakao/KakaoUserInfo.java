@@ -1,8 +1,10 @@
-package security.oauth.provider;
+package security.oauth.kakao;
+
+import security.oauth.provider.Oauth2UserInfo;
 
 import java.util.Map;
 
-public class KakaoUserInfo implements Oauth2UserInfo{
+public class KakaoUserInfo implements Oauth2UserInfo {
 
     private Map<String, Object> attributes;
 

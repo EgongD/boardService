@@ -6,6 +6,7 @@ import lombok.*;
 import user.entity.User;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +31,12 @@ public class Board extends Auditable {
 
     @Column
     private String hashtag;
+
+    @Column
+    private LocalDateTime createdDate;
+
+    @Column
+    private LocalDateTime modifiedDate;
 
     @ManyToOne
     @JoinColumn(name = "user_id")

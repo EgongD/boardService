@@ -1,5 +1,6 @@
 package user.service;
 
+import global.CustomAuthorityUtils;
 import global.exception.BusinessLogicException;
 import global.exception.ExceptionCode;
 import user.entity.User;
@@ -20,17 +21,15 @@ public class UserService {
 
     private final PasswordEncoder passwordEncoder;
 
-
-    private final ApplicationEventPublisher publisher;
-
+    private final CustomAuthorityUtils authorityUtils;
 
     public UserService(UserRepository userRepository,
                        PasswordEncoder passwordEncoder,
-                       ApplicationEventPublisher publisher){
+                       CustomAuthorityUtils authorityUtils){
 
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
-        this.publisher = publisher;
+        this.authorityUtils = authorityUtils;
     }
 
     public User createMember(User user){
@@ -41,6 +40,11 @@ public class UserService {
         // 비밀번호 암호화
         String encryptedPassword = passwordEncoder.encode(user.getPassword());
         user.setPassword(encryptedPassword);
+
+        // 회원의 권한 설정
+        List<String> roles = authorityUtils.createRoles(user.getEmail());
+        user.setRoles(roles);
+        user.setProvider("default");
 
         // 회원 저장
         User savedUser = userRepository.save(user);
