@@ -55,4 +55,16 @@ public class UserDto {
 
         private String username;
     }
+
+    @Getter
+    @AllArgsConstructor
+    static public class OauthPost {
+
+        private String email;
+
+        private String username;
+
+        private String image;
+
+    }
 }

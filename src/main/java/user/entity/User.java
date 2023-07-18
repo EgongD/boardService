@@ -42,6 +42,9 @@ public class User extends Auditable {
     @Column(name = "activated")
     private boolean activated;
 
+    @Column
+    private String image;
+
     @CreationTimestamp
     private Timestamp createDate;
 
