@@ -53,6 +53,15 @@ public class UserService {
         return savedUser;
     }
 
+    public void createSocialUser(User user) {
+        verifyExistEmail(user.getEmail());
+
+        List<String> roles = authorityUtils.createRoles(user.getEmail());
+        user.setRoles(roles);
+
+        userRepository.save(user);
+    }
+
     public User updateMember(User user) {
 
         User findUser = findExistedUser(user.getUserId());

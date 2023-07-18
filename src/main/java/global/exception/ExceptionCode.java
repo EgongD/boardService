@@ -20,6 +20,8 @@ public enum ExceptionCode {
 
     UNAUTHORIZED(409, "직성자가 동일하지 않습니다."),
 
+    INVALID_KAKAO_CODE(409, "Kakao Code Invalid"),
+
     DIFFERENT_REFRESHTOKEN(409, "RefreshTokens are different");
 
     @Getter
